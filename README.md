@@ -70,6 +70,3 @@ pip install -r requirements.txt
 1. 01_EDA_audio_features.ipynb
 2. 02_model_autoencoder_training.ipynb
 3. 03_inference_prediction.ipynb
-
-👤 Auteur
-Projet réalisé par [Ton Nom], dans le cadre du challenge DCASE 2024 Task 2.
