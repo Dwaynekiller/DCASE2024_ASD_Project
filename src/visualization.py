@@ -1,5 +1,11 @@
-# visualization.py
+"""
+visualization.py
 
+Utility functions for audio data visualization.
+
+Author: GUIDY Mike
+Date: 2025-03-12
+"""
 import numpy as np
 #import pandas as pd
 #import seaborn as sns

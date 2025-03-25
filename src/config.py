@@ -7,6 +7,9 @@ Defines:
 - Directory structure (root, data, logs, models)
 - Feature extraction parameters (FFT, MFCC, etc.)
 - Paths for saving models, scalers, thresholds
+
+Author: GUIDY Mike
+Date: 2025-03-12
 """
 from pathlib import Path
 

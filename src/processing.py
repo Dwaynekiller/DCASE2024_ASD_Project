@@ -9,7 +9,7 @@ Provides:
   - save_features: Saves extracted features in a structured format.
   - load_features_dataset: Loads saved feature matrices for training.
 
-Author: [Your Name]
+Author: GUIDY Mike
 Date: 2025-03-12
 """
 #import os
