@@ -31,16 +31,25 @@ This project is a complete implementation of **DCASE 2024 - Task 2**, aimed at d
 → `notebooks/01_EDA_audio_features.ipynb`
 
 - Signal visualization (waveforms, spectrograms, MFCCs)
+
+### 2. Extract features (MFCC, MEL etc..)
+→ `notebooks/02_Extract_features.ipynb`
+
 - Feature extraction and statistical analysis
 
-### 2. Autoencoder model training
-→ `notebooks/02_model_autoencoder_training.ipynb`
+### 3. Supervise model training and comparison (SVM, KNN, rf, XGBoost)
+→ `notebooks/03_supervised_models_comparison.ipynb`
+
+- Statistical analysis
+
+### 4. Autoencoder model training
+→ `notebooks/04_model_autoencoder_training.ipynb`
 
 - Training on normal sounds
 - Save model, scaler, threshold
 
-### 3. inference and detection on new files
-→ `notebooks/03_inference_prediction.ipynb`
+### 5. inference and detection on new files
+→ `notebooks/05_inference_prediction.ipynb`
 
 - Apply model to test sounds
 - Report generation and submission
@@ -68,5 +77,7 @@ pip install -r requirements.txt
 
 # Run notebooks in order:
 1. 01_EDA_audio_features.ipynb
-2. 02_model_autoencoder_training.ipynb
-3. 03_inference_prediction.ipynb
+2. 02_Extract_features.ipynb
+3. 03_supervised_models_comparison.ipynb
+4. 04_model_autoencoder_training.ipynb
+5. 05_inference_prediction.ipynb
