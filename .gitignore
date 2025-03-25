@@ -1,0 +1,9 @@
+*.npy
+*.docx
+*.pdf
+*.pkl
+*.wav
+*.jpg
+*.log.*
+*.csv
+*.txt
