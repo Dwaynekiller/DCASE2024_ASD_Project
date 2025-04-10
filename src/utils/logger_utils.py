@@ -20,12 +20,16 @@ from logging.handlers import RotatingFileHandler
 from functools import wraps
 from typing import Callable, Any
 from pathlib import Path
-from src.config import LOG_FILE  # Chemin par défaut vers votre log file
+from src import config
+
+
+LOG_FILE = config.LOG_FILE
+DEBUG_MODE = config.DEBUG_MODE
 
 def configure_logger(
     log_file: Path = LOG_FILE,
-    file_log_level: int = logging.INFO,
-    console_log_level: int = logging.WARNING
+    file_log_level: int = logging.DEBUG if DEBUG_MODE else logging.WARNING,
+    console_log_level: int = logging.INFO if DEBUG_MODE else logging.WARNING
 ) -> logging.Logger:
     """
     Configures a centralized logger with rotation.
@@ -59,7 +63,8 @@ def configure_logger(
             filename=log_file,
             maxBytes=10 * 1024 * 1024,  # 10MB
             backupCount=5,
-            encoding='utf-8'
+            encoding='utf-8',
+            delay=True
         )
         file_handler.setLevel(file_log_level)
         file_handler.setFormatter(formatter)
@@ -75,6 +80,7 @@ def configure_logger(
     return logger
 
 
+# Décorateur pour la gestion des erreurs (exemple simplifié)
 def handle_errors(func: Callable) -> Callable:
     """
     Decorator for centralized exception handling.
@@ -91,12 +97,26 @@ def handle_errors(func: Callable) -> Callable:
         try:
             return func(*args, **kwargs)
         except ValueError as ve:
-            logger.error(f"Validation error in {func.__name__}: {ve}")
+            logger.error(f"Validation error in {func.__name__}: {str(ve)}")
         except Exception as e:
-            logger.critical(f"Critical error in {func.__name__}: {e}")
-            raise
+            logger.critical(f"Critical error in {func.__name__}: {str(e)}")
+            logger.error(f"Unhandled error in {func.__name__}: {e}", exc_info=True)
+            raise e
     return wrapper
 
+def close_logger_handlers(logger: logging.Logger) -> None:
+    """
+    Closes all handlers of a given logger to release file handles.
+
+    Args:
+        logger (logging.Logger): The logger instance to clean up.
+    """
+    for handler in logger.handlers[:]:
+        try:
+            handler.close()
+            logger.removeHandler(handler)
+        except Exception as e:
+            print(f"Error while closing logger handler: {e}")
 
 # Initialize the logger at module load with default levels
 logger = configure_logger()
